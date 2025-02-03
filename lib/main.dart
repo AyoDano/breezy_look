@@ -1,3 +1,4 @@
+import 'package:breezy_look/modules/screens/add_items.dart';
 import 'package:breezy_look/modules/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:breezy_look/config/themes/theme_light.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'BreezyLook Theme',
       theme: AppTheme.lightTheme, // This is where I use my custom theme
       home: HomeScreen(), // Here is where the App starts / Starting point
+      routes: {
+        '/add_items': (context) => AddItemsScreen(),
+      },
     );
   }
 }
