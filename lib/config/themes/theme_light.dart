@@ -10,8 +10,41 @@ class AppTheme {
   static const Color textColor = Color(0xff212121);
   static const Color alertColor = Color(0xFFdf2935);
 
+  // Getter for transparent colors
+  static Color get primaryColorTransparent =>
+      primaryColor.withValues(alpha: 0.5);
+  static Color get secondaryColorTransparent =>
+      secondaryColor.withValues(alpha: 0.5);
+  static Color get backgroundColorTransparent =>
+      backgroundColor.withValues(alpha: 0.3);
+  static Color get alertColorTransparent => alertColor.withValues(alpha: 0.7);
+
   // Fonts
   static const String fontFamily = "Geist"; // Local application font
+
+  // Button Styles
+  static final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: primaryColor,
+    foregroundColor: Colors.white,
+    textStyle: GoogleFonts.spectral(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    ),
+    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    elevation: 4,
+  );
+
+  static final ButtonStyle textButtonStyle = TextButton.styleFrom(
+    foregroundColor: primaryColor,
+    textStyle: GoogleFonts.spectral(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  );
 
   // ThemeData
   static ThemeData lightTheme = ThemeData(
@@ -51,5 +84,7 @@ class AppTheme {
         color: textColor,
       ),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
+    textButtonTheme: TextButtonThemeData(style: textButtonStyle),
   );
 }

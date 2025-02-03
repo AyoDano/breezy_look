@@ -9,7 +9,7 @@ class TodayForecast extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Text(
-          "Today in Valletta, you can expect sun giving way to increasing clouds, with a high of 20°C and a low of 13°C. Given the mild temperatures, a light sweater or long-sleeved shirt should suffice during the day. In the evening, consider adding a light jacket to stay comfortable as temperatures dip. Long pants and comfortable footwear are recommended for exploring the city. While rain isn't expected today, it's always a good idea to carry a small umbrella or a waterproof layer, just in case.",
+          "Today in Valletta, you can expect sun giving way to increasing clouds, with a high of 20°C and a low of 13°C. Given the mild temperatures, a light sweater or long-sleeved shirt should suffice during the day. \n\nIn the evening, consider adding a light jacket to stay comfortable as temperatures dip. Long pants and comfortable footwear are recommended for exploring the city. While rain isn't expected today, it's always a good idea to carry a small umbrella or a waterproof layer, just in case.",
           textAlign: TextAlign.justify,
         ),
       ]),

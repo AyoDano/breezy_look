@@ -63,7 +63,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/app_icon/icon_breezylook.png
-    - assets/icons/dress_me_icon.svg
+    - assets/icons/
     - assets/fonts/geist_ttf/
 
   fonts:

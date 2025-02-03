@@ -47,30 +47,38 @@ class FullWidthBanner extends StatelessWidget {
                   children: [
                     Text(
                       "20°",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                color: AppTheme.backgroundColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 50,
+                              ),
                     ),
-                    SizedBox(width: 8),
-                    SvgPicture.asset(
-                      "assets/icons/dress_me_icon.svg",
-                      width: 32,
-                      height: 32,
-                      colorFilter: ColorFilter.mode(
-                        AppTheme.backgroundColor,
-                        BlendMode.srcIn,
+                    ClipOval(
+                      child: Container(
+                        width: 45,
+                        height: 45,
+                        color: AppTheme.primaryColor.withValues(alpha: 0.7),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2),
+                          child: SvgPicture.asset(
+                            "assets/icons/weather_sunny_icon.svg",
+                            colorFilter: ColorFilter.mode(
+                              AppTheme.backgroundColor,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 6),
                 Text(
                   "Valletta, Malta",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Colors.white,
+                        color: AppTheme.backgroundColor,
                         fontWeight: FontWeight.bold,
+                        fontSize: 32,
                       ),
                   textAlign: TextAlign.left,
                 ),
