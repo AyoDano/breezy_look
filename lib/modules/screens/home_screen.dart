@@ -76,8 +76,9 @@ class HomeScreen extends StatelessWidget {
                       height: 20,
                     ),
                     IosStyleButton(
-                      text: "Dress Me",
+                      text: "Add Item",
                       onPressed: () {
+                        Navigator.pushNamed(context, '/add_items');
                         print("Button gedrückt!");
                       },
                     ),
