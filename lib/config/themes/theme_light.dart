@@ -54,8 +54,27 @@ class AppTheme {
     scaffoldBackgroundColor: backgroundColor,
     fontFamily: fontFamily, // Standard: Geist font
     textTheme: TextTheme(
-      headlineLarge: TextStyle(
+      // types of headlines
+      displayLarge: TextStyle(
         fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: textColor,
+        fontFamily: fontFamily,
+      ),
+      displayMedium: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: textColor,
+        fontFamily: fontFamily,
+      ),
+      displaySmall: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: textColor,
+        fontFamily: fontFamily,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 28,
         fontWeight: FontWeight.bold,
         color: textColor,
         fontFamily: fontFamily,
