@@ -22,7 +22,7 @@ class SelectableChipsRowState extends State<SelectableChipsRow> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 0, 16),
+      padding: const EdgeInsets.fromLTRB(16, 8, 0, 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
