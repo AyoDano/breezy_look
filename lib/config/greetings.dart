@@ -4,14 +4,14 @@ class Greetings {
   static String getGreeting() {
     final hour = DateTime.now().hour;
     List<String> morningGreetings = [
-      "Rise and shine !",
-      "Good morning, sunny !",
+      "Rise and shine!",
+      "Good morning, sunny!",
       "A fresh day ahead!"
     ];
     List<String> afternoonGreetings = [
-      "Welcome !",
-      "Hey there !",
-      "Looking stylish today !"
+      "Welcome!",
+      "Hey there!",
+      "Looking stylish today!"
     ];
 
     List<String> eveningGreetings = [
