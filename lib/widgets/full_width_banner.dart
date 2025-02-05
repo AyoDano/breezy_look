@@ -28,8 +28,8 @@ class FullWidthBanner extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    AppTheme.secondaryColor.withValues(alpha: 0.3),
-                    AppTheme.secondaryColor.withValues(alpha: 0.7),
+                    Colors.black.withValues(alpha: 0.3),
+                    Colors.black.withValues(alpha: 0.9),
                   ],
                   stops: [0.0, 0.5, 1.0],
                 ),
@@ -58,9 +58,9 @@ class FullWidthBanner extends StatelessWidget {
                       child: Container(
                         width: 45,
                         height: 45,
-                        color: AppTheme.primaryColor.withValues(alpha: 0.7),
+                        color: const Color(0xFFEDAA0D),
                         child: Padding(
-                          padding: const EdgeInsets.all(2),
+                          padding: const EdgeInsets.all(4),
                           child: SvgPicture.asset(
                             "assets/icons/weather_sunny_icon.svg",
                             colorFilter: ColorFilter.mode(
