@@ -1,7 +1,9 @@
 import 'package:breezy_look/config/themes/theme_light.dart';
 import 'package:breezy_look/config/greetings.dart';
+import 'package:breezy_look/modules/data/models/fashion_item.dart';
 import 'package:breezy_look/widgets/full_width_banner.dart';
 import 'package:breezy_look/widgets/ios_button.dart';
+import 'package:breezy_look/widgets/picture_card.dart';
 import 'package:breezy_look/widgets/today_location_forecast.dart';
 import 'package:flutter/material.dart';
 
@@ -35,17 +37,16 @@ class HomeScreen extends StatelessWidget {
                             Greetings.getGreeting(),
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineMedium
+                                .displaySmall
                                 ?.copyWith(fontWeight: FontWeight.bold),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
-                          SizedBox(height: 4),
                           Text(
                             userName,
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineLarge
+                                .headlineMedium
                                 ?.copyWith(color: AppTheme.secondaryColor),
                           ),
                         ],
@@ -60,21 +61,39 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              //ArticleForecastTitle(),
+
+              // Scrollbare Row mit Fashion-Items
+              SizedBox(
+                height: 150,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: fashionItems.map((item) {
+                      return CenteredImageWidget(imagePath: item.imagePath);
+                    }).toList(),
+                  ),
+                ),
+              ),
+
               FullWidthBanner(),
-              TodayForecast(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+                child: TodayForecast(),
+              ),
+
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 20),
-                    Divider(
-                      indent: 16,
-                      endIndent: 16,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+                      child: Divider(
+                        color: Colors.grey.shade300,
+                      ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 20),
                     IosStyleButton(
                       text: "Add Item",
                       onPressed: () {
