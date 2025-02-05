@@ -4,7 +4,7 @@ import 'package:breezy_look/config/themes/theme_light.dart';
 
 class IosStyleButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const IosStyleButton({
     super.key,
