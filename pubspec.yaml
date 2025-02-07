@@ -66,6 +66,7 @@ flutter:
     - assets/fashion_items/
     - assets/icons/
     - assets/fonts/geist_ttf/
+    - assets/user/
 
   fonts:
     - family: Geist
