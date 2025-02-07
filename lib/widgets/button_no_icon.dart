@@ -13,11 +13,11 @@ class IconlessButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 70),
-      child: GestureDetector(
-        onTap: onPressed,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Center(
         child: Container(
+          width: 200,
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           decoration: BoxDecoration(
             color: AppTheme.primaryColor,

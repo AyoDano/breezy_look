@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:breezy_look/config/themes/theme_light.dart';
 
-class FullWidthBanner extends StatelessWidget {
-  const FullWidthBanner({super.key});
+class LocationBanner extends StatelessWidget {
+  const LocationBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 48, 16, 0),
+      padding: const EdgeInsets.all(16),
       child: SizedBox(
         width: double.infinity,
         height: 200,
@@ -17,12 +17,20 @@ class FullWidthBanner extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://images.unsplash.com/photo-1527155431803-74e5f93c7111?q=80&w=2888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://images.unsplash.com/photo-1527155431803-74e5f93c7111?q=80&w=2888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius:
+                      BorderRadius.circular(20), // Corner radius for image
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppTheme.colorGreyTwo.withValues(alpha: 0.3),
+                        spreadRadius: 2,
+                        blurRadius: 8,
+                        offset: Offset(0, 6))
+                  ]),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -35,6 +43,7 @@ class FullWidthBanner extends StatelessWidget {
                     ],
                     stops: [0.0, 0.5, 1.0],
                   ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
@@ -62,7 +71,7 @@ class FullWidthBanner extends StatelessWidget {
                         child: Container(
                           width: 45,
                           height: 45,
-                          color: const Color(0xFFEDAA0D),
+                          color: const Color.fromARGB(255, 255, 166, 0),
                           child: Padding(
                             padding: const EdgeInsets.all(4),
                             child: SvgPicture.asset(

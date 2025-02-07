@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:breezy_look/config/themes/theme_light.dart';
 
-class IosStyleButton extends StatelessWidget {
+class ButtonStyledWidget extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
 
-  const IosStyleButton({
+  const ButtonStyledWidget({
     super.key,
     required this.text,
     required this.onPressed,

@@ -43,23 +43,21 @@ class _SliderWidgetState extends State<SliderWidget> {
                   BlendMode.srcIn,
                 ),
               ), // Left Icon
+
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Slider(
-                    value: _sliderValue,
-                    min: 0.0,
-                    max: 5.0,
-                    divisions: 5,
-                    onChanged: (double value) {
-                      setState(() {
-                        _sliderValue = value;
-                      });
-                    },
-                    activeColor: AppTheme.primaryColor,
-                    inactiveColor: AppTheme.colorGreyTwo,
-                    thumbColor: AppTheme.backgroundColor,
-                  ),
+                child: Slider(
+                  value: _sliderValue,
+                  min: 0.0,
+                  max: 5.0,
+                  divisions: 5,
+                  onChanged: (double value) {
+                    setState(() {
+                      _sliderValue = value;
+                    });
+                  },
+                  activeColor: AppTheme.primaryColor,
+                  inactiveColor: AppTheme.colorGreyTwo,
+                  thumbColor: AppTheme.backgroundColor,
                 ),
               ),
               SvgPicture.asset(

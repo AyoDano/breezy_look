@@ -17,7 +17,7 @@ class Greetings {
     List<String> eveningGreetings = [
       "Good evening!",
       "Time to unwind!",
-      "Time to Relax!"
+      "Now, let's relax!"
     ];
 
     final random = Random();

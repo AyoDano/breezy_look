@@ -1,7 +1,7 @@
-import 'package:breezy_look/config/themes/theme_light.dart';
-import 'package:breezy_look/widgets/button_no_icon_widget.dart';
+import 'package:breezy_look/widgets/button_no_icon.dart';
+import 'package:breezy_look/widgets/custom_app_bar_header_animate.dart';
 import 'package:breezy_look/widgets/selectable_chips_row.dart';
-import 'package:breezy_look/widgets/size_selector.dart';
+import 'package:breezy_look/widgets/selector_widget.dart';
 import 'package:breezy_look/widgets/slider_widget.dart';
 import 'package:breezy_look/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
@@ -14,28 +14,16 @@ class AddItemsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 120,
-            floating: false,
-            pinned: true,
-            backgroundColor: AppTheme.backgroundColor,
-            elevation: 4,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                "Add New Item",
-                style: AppTheme.lightTheme.textTheme.displaySmall,
-              ),
-              background: Container(color: AppTheme.backgroundColor),
-            ),
-          ),
+          ///TODO: sliver animated AppBar color not in background color
+          CustomAppBarHeaderAnimate(),
           SliverList(
             delegate: SliverChildListDelegate([
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Card(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Card(
                       elevation: 4,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -50,65 +38,73 @@ class AddItemsScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    TextFieldWithLabel(
-                        label: "Item Name: *",
-                        placeholder: "Black Cardigan, Pants..."),
-                    const SizedBox(height: 30),
-                    SelectableChipsRow(
-                      label: 'Category:',
-                      chipOptions: ["Shirt", "Pants", "Accessorie", "Shoes"],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      child: Divider(color: Colors.grey.shade300),
-                    ),
-                    SelectableChipsRow(
-                      label: 'Style:',
-                      chipOptions: ["Casual", "Formal", "Sport", "Elegant"],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      child: Divider(color: Colors.grey.shade300),
-                    ),
-                    SizeSelectorRow(label: "Size", chipOptions: [
-                      "XS",
-                      "S",
-                      "M",
-                      "L",
-                      "XL",
-                    ]),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      child: Divider(color: Colors.grey.shade300),
-                    ),
-                    SelectableChipsRow(
-                      label: 'Material:',
-                      chipOptions: ["Wool", "Leather", "Cotton", "Silk"],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      child: Divider(color: Colors.grey.shade300),
-                    ),
-                    SelectableChipsRow(
-                      label: 'Finishing / Feeling:',
-                      chipOptions: [
-                        "Waterproof",
-                        "Breatheable",
-                        "Cotton",
-                        "Silk"
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      child: Divider(color: Colors.grey.shade300),
-                    ),
-                    SliderWidget(label: "Sweat"),
-                    const SizedBox(height: 20),
-                    IconlessButtonWidget(text: "Add Item", onPressed: () {}),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextFieldWithLabel(
+                      label: "Item Name:",
+                      placeholder: "Black Cardigan, Pants..."),
+                  const SizedBox(height: 30),
+                  SelectableChipsRow(
+                    label: "Category:",
+                    chipOptions: ["Shirt", "Pants", "Accessorie", "Shoes"],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: Divider(color: Colors.grey.shade300),
+                  ),
+                  SizeSelectorRow(
+                      label: "Season:",
+                      chipOptions: ["Spring", "Summer", "Fall", "Winter"]),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: Divider(color: Colors.grey.shade300),
+                  ),
+                  SelectableChipsRow(
+                    label: "Style:",
+                    chipOptions: ["Casual", "Formal", "Sport", "Elegant"],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: Divider(color: Colors.grey.shade300),
+                  ),
+                  SizeSelectorRow(label: "Size:", chipOptions: [
+                    "XS",
+                    "S",
+                    "M",
+                    "L",
+                    "XL",
+                  ]),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: Divider(color: Colors.grey.shade300),
+                  ),
+                  SelectableChipsRow(
+                    label: "Material:",
+                    chipOptions: ["Wool", "Leather", "Cotton", "Silk"],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: Divider(color: Colors.grey.shade300),
+                  ),
+                  SelectableChipsRow(
+                    label: "Finishing / Feeling:",
+                    chipOptions: [
+                      "Waterproof",
+                      "Breatheable",
+                      "Lightweight",
+                      "Wrinkle-Free",
+                      "Windproof",
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    child: Divider(color: Colors.grey.shade300),
+                  ),
+                  SliderWidget(label: "Sweat intensity:"),
+                  const SizedBox(height: 20),
+                  IconlessButtonWidget(text: "Add Item", onPressed: () {}),
+                  const SizedBox(height: 20),
+                ],
               ),
             ]),
           ),
