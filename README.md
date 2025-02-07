@@ -1,16 +1,23 @@
-# breezy_look
+# BreezyLook
 
-A new Flutter project.
+BreezyLook ist eine intelligente Wetter- und Fashion-App, die dir hilft, dich passend zum aktuellen Wetter zu kleiden. Mit personalisierten Outfit-Empfehlungen und praktischen Funktionen wird die tägliche Kleiderwahl zum Kinderspiel.
 
-## Getting Started
+## Funktionen
 
-This project is a starting point for a Flutter application.
+- ☀️ **Wetterbasierte Outfit-Empfehlungen**: Erhalte Vorschläge, die perfekt an das aktuelle Wetter angepasst sind.
+- 🌍 **Lokale Wettervorhersage**: Bleibe informiert mit genauen Wetterdaten für deinen Standort.
+- 🎒 **Virtueller Kleiderschrank**: Digitalisiere deine Garderobe und verwalte deine Kleidung.
+- 🛍️ **Shopping-Vorschläge**: Finde passende Modeartikel in nahegelegenen Stores.
+- 🌎 **Urlaubs- und Packlisten-Funktion**: Plane Outfits für deine Reisen basierend auf dem Reiseziel und Wetter.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologie-Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter & Dart** für die App-Entwicklung
+- **Firebase** für Authentifizierung und Datenbank
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## To-Do
+
+- ✅ Grundlegende Outfit-Empfehlungen
+- ⭕ Wetter (API) integration
+- ⭕ Erweiterte Shopping-Funktionen
+- ⭕ KI-gestützte Outfit-Vorschläge
