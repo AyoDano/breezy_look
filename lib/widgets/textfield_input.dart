@@ -49,3 +49,59 @@ class TextFieldWithLabel extends StatelessWidget {
     );
   }
 }
+
+class SearchField extends StatelessWidget {
+  final String placeholder;
+
+  const SearchField({
+    super.key,
+    required this.placeholder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
+            style: TextStyle(
+              fontSize: 14,
+            ),
+            decoration: InputDecoration(
+              hintText: placeholder,
+              hintStyle: TextStyle(color: AppTheme.colorGreyTwo),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              filled: false,
+              focusColor: AppTheme.teritaryColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: AppTheme.secondaryColor,
+                  width: 1.5,
+                ),
+              ),
+              // Focused mode color
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: AppTheme.primaryColor,
+                ),
+              ),
+              // Active mode color
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: AppTheme.teritaryColor,
+                  width: 1.5,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
