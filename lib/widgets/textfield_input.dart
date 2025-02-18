@@ -5,12 +5,14 @@ class TextFieldWithLabel extends StatelessWidget {
   final String label;
   final String placeholder;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const TextFieldWithLabel({
     super.key,
     required this.label,
     required this.placeholder,
     required this.controller,
+    this.validator,
   });
 
   @override
@@ -29,7 +31,7 @@ class TextFieldWithLabel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 5),
-          TextField(
+          TextFormField(
             controller: controller,
             style: const TextStyle(fontSize: 14),
             decoration: InputDecoration(
@@ -51,6 +53,7 @@ class TextFieldWithLabel extends StatelessWidget {
                 ),
               ),
             ),
+            validator: validator,
           ),
         ],
       ),
@@ -73,7 +76,7 @@ class SearchField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
+          TextFormField(
             style: const TextStyle(fontSize: 14),
             decoration: InputDecoration(
               hintText: placeholder,
