@@ -50,22 +50,18 @@ class MainScreenState extends State<MainScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        height: 90,
         shape: CircularNotchedRectangle(),
         color: AppTheme.teritaryColor,
         elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              _buildNavItem(0),
-              _buildNavItem(1),
-              SizedBox(width: 40),
-              _buildNavItem(2),
-              _buildNavItem(3),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _buildNavItem(0),
+            _buildNavItem(1),
+            SizedBox(width: 40),
+            _buildNavItem(2),
+            _buildNavItem(3),
+          ],
         ),
       ),
     );
@@ -80,6 +76,8 @@ class MainScreenState extends State<MainScreen> {
         IconButton(
           icon: SvgPicture.asset(
             "assets/icons/${_navIcons[index]}-${isSelected ? 'active' : 'inactive'}.svg",
+            fit: BoxFit.contain,
+            height: 40,
             colorFilter: ColorFilter.mode(
               isSelected ? AppTheme.primaryColor : Colors.white,
               BlendMode.srcIn,

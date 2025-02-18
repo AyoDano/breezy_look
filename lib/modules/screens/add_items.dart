@@ -6,8 +6,15 @@ import 'package:breezy_look/widgets/slider_widget.dart';
 import 'package:breezy_look/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
 
-class AddItemsScreen extends StatelessWidget {
+class AddItemsScreen extends StatefulWidget {
   const AddItemsScreen({super.key});
+
+  @override
+  State<AddItemsScreen> createState() => _AddItemsScreenState();
+}
+
+class _AddItemsScreenState extends State<AddItemsScreen> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +48,10 @@ class AddItemsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextFieldWithLabel(
-                      label: "Item Name:",
-                      placeholder: "Black Cardigan, Pants..."),
+                    label: "Item Name:",
+                    placeholder: "Black Cardigan, Pants...",
+                    controller: controller,
+                  ),
                   const SizedBox(height: 30),
                   SelectableChipsRow(
                     label: "Category:",

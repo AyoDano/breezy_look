@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class PlaceholderScreen extends StatelessWidget {
   final String title;
+
   const PlaceholderScreen(this.title, {super.key});
 
   @override
