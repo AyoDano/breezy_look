@@ -1,27 +1,26 @@
-import '../models/user.dart';
-import '../models/weather.dart';
-import '../models/clothingItem.dart';
-import 'mock_database.md';
+import 'package:breezy_look/modules/data/models/fashion_item.dart';
+import 'package:breezy_look/modules/data/models/user.dart';
+import 'package:breezy_look/modules/data/models/weather.dart';
 
 abstract class DatabaseRepository {
-  // Konstruktor
-  DatabaseRepository(MockDatabase mockDatabase);
+  // Constructor
+  DatabaseRepository();
 
-  // Nutzer hinzufügen
+  // Add a user to the database
   void addUser(User user);
 
-  // Kleidungsstück hinzufügen
-  void addClothingItem(ClothingItem item);
+  // Add a clothing item to the database
+  void addClothingItem(FashionItem item);
 
-  // Kleidungsstücke nach Kategorie filtern
-  List<ClothingItem> getClothingItemsByCategory(String category);
+  // Retrieve clothing items by category
+  List<FashionItem> getClothingItemsByCategory(String category);
 
-  // Alle Kleidungsstücke abrufen
-  List<ClothingItem> getAllClothingItems();
+  // Retrieve all clothing items
+  List<FashionItem> getAllClothingItems();
 
-  // Outfit-Vorschläge abrufen
-  List<ClothingItem> getOutfitSuggestions(String category);
+  // Retrieve outfit suggestions based on a category
+  List<FashionItem> getOutfitSuggestions(String category);
 
-  // Wetter aktualisieren
+  // Update the current weather data
   void updateWeather(Weather weather);
 }
