@@ -32,8 +32,8 @@ class TextFieldWithLabel extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           TextFormField(
-            controller: controller,
             style: const TextStyle(fontSize: 14),
+            controller: controller,
             decoration: InputDecoration(
               hintText: placeholder,
               hintStyle: TextStyle(color: AppTheme.colorGreyTwo),
@@ -114,7 +114,7 @@ class SearchField extends StatelessWidget {
   }
 }
 
-class PasswordFieldWithLabel extends StatelessWidget {
+class PasswordFieldWithLabel extends StatefulWidget {
   final String label;
   final String placeholder;
   final TextEditingController controller;
@@ -126,47 +126,45 @@ class PasswordFieldWithLabel extends StatelessWidget {
     required this.placeholder,
     required this.controller,
     this.isLabelVisible = true,
+    required String? Function(dynamic value) validator,
   });
+
+  @override
+  _PasswordFieldWithLabelState createState() => _PasswordFieldWithLabelState();
+}
+
+class _PasswordFieldWithLabelState extends State<PasswordFieldWithLabel> {
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   String? validatePassword(String password) {
     if (password.length < 8 || password.length > 100) {
-      return 'Password length must be between 8 and 100 characters';
+      return 'Use min. 8 characters';
     }
-
     if (!RegExp(r'[A-Z]').hasMatch(password)) {
-      return 'Password must have at least one uppercase letter';
+      return 'Use at least one uppercase letter';
     }
-
     if (!RegExp(r'[a-z]').hasMatch(password)) {
-      return 'Password must have at least one lowercase letter';
+      return 'Use at least one lowercase letter';
     }
-
     if (!RegExp(r'[0-9]').hasMatch(password)) {
-      return 'Password must have at least one number';
+      return 'Use at least one number';
     }
-
-    if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password)) {
-      return 'Password must include at least one special character';
+    if (!RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(password)) {
+      return 'Use at least one special character';
     }
-
     if (RegExp(r'12345678').hasMatch(password) ||
         RegExp(r'1234').hasMatch(password)) {
       return 'Password contains simple number sequences';
     }
-
     if (RegExp(r'(.)\1\1').hasMatch(password)) {
       return 'Password contains repeated characters';
     }
-
-    return null;
-  }
-
-  String? validatePasswordConfirmation(
-      String password, String confirmPassword) {
-    if (password != confirmPassword) {
-      return 'Password and confirmation do not match';
-    }
-
     return null;
   }
 
@@ -177,9 +175,9 @@ class PasswordFieldWithLabel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (isLabelVisible && label.isNotEmpty)
+          if (widget.isLabelVisible && widget.label.isNotEmpty)
             Text(
-              label,
+              widget.label,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -188,10 +186,11 @@ class PasswordFieldWithLabel extends StatelessWidget {
             ),
           const SizedBox(height: 5),
           TextFormField(
-            controller: controller,
-            obscureText: true,
+            style: const TextStyle(fontSize: 14),
+            controller: widget.controller,
+            obscureText: _obscureText,
             decoration: InputDecoration(
-              hintText: placeholder,
+              hintText: widget.placeholder,
               hintStyle: TextStyle(color: AppTheme.colorGreyTwo),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -207,6 +206,13 @@ class PasswordFieldWithLabel extends StatelessWidget {
                   color: AppTheme.teritaryColor,
                   width: .5,
                 ),
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.grey,
+                ),
+                onPressed: _togglePasswordVisibility,
               ),
             ),
             validator: (value) => validatePassword(value ?? ''),
@@ -227,11 +233,12 @@ class EmailFieldWithLabel extends StatelessWidget {
     required this.label,
     required this.placeholder,
     required this.controller,
+    required String? Function(dynamic value) validator,
   });
 
   String? validateEmail(String email) {
     if (email.length < 3 || email.length > 320) {
-      return 'Email must be between 3 and 320 characters long';
+      return 'Email must have min. 3 characters';
     }
 
     if (!email.contains('@')) {
@@ -241,7 +248,7 @@ class EmailFieldWithLabel extends StatelessWidget {
     final localPart = email.split('@')[0];
     final localPartRegex = RegExp(r'^[a-zA-Z0-9]+$');
     if (!localPartRegex.hasMatch(localPart)) {
-      return 'The part before the "@" can only contain alphanumeric characters';
+      return 'Please use only alphanumeric characters';
     }
 
     final domainPart = email.split('@')[1];
@@ -274,6 +281,7 @@ class EmailFieldWithLabel extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            style: const TextStyle(fontSize: 14),
             controller: controller,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
@@ -317,25 +325,25 @@ class UsernameFieldWithLabel extends StatelessWidget {
 
   String? validateUsername(String username) {
     if (username.length < 3 || username.length > 30) {
-      return 'Username must be between 3 and 30 characters long';
+      return 'Plese use min. 3 characters';
     }
 
     if (username.contains(' ')) {
-      return 'Username cannot contain spaces';
+      return 'This cannot contain spaces';
     }
 
     final validUsernameRegex = RegExp(r'^[a-zA-Z-]+$');
     if (!validUsernameRegex.hasMatch(username)) {
-      return 'Username can only contain letters and hyphens';
+      return 'Please use letters and hyphens only';
     }
 
     if (username.contains('"') || username.contains("'")) {
-      return 'Username cannot contain quotation marks';
+      return "This can't contain quotation marks";
     }
 
     final nameParts = username.split('-');
     if (nameParts.length > 2) {
-      return 'Username can only contain two names';
+      return 'Please use max. two names';
     }
 
     return null;
@@ -358,6 +366,7 @@ class UsernameFieldWithLabel extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            style: const TextStyle(fontSize: 14),
             controller: controller,
             decoration: InputDecoration(
               hintText: placeholder,
