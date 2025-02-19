@@ -13,23 +13,28 @@ class IconlessButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDisabled = onPressed == null;
+
     return GestureDetector(
-      onTap: onPressed,
+      onTap: isDisabled ? null : onPressed,
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Container(
             height: 48,
             decoration: BoxDecoration(
-              color: AppTheme.primaryColor,
+              color:
+                  isDisabled ? AppTheme.teritaryColor : AppTheme.primaryColor,
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: AppTheme.primaryColor.withValues(alpha: 0.2),
-                  blurRadius: 8,
-                  offset: Offset(0, 4),
-                ),
-              ],
+              boxShadow: isDisabled
+                  ? []
+                  : [
+                      BoxShadow(
+                        color: AppTheme.primaryColor.withValues(alpha: 0.2),
+                        blurRadius: 8,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
             ),
             child: Center(
               child: Text(
