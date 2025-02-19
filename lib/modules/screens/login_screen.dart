@@ -1,5 +1,4 @@
 import 'package:breezy_look/modules/screens/home_screen.dart';
-import 'package:breezy_look/modules/screens/placeholder_screen_user.dart';
 import 'package:breezy_look/modules/screens/signin_screen.dart';
 import 'package:breezy_look/widgets/button_no_icon.dart';
 import 'package:breezy_look/widgets/terms_and_privacy_text.dart';
