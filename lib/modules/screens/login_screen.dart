@@ -1,3 +1,4 @@
+import 'package:breezy_look/modules/screens/home_screen.dart';
 import 'package:breezy_look/modules/screens/placeholder_screen_user.dart';
 import 'package:breezy_look/modules/screens/signin_screen.dart';
 import 'package:breezy_look/widgets/button_no_icon.dart';
@@ -17,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final String correctEmail = "MiaoMiao@mail.com";
-  final String correctPassword = "MiaoMiao";
+  final String correctPassword = "MiaoMiao1!";
 
   final _formKey = GlobalKey<FormState>();
   bool isButtonEnabled = false;
@@ -47,13 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       if (emailController.text == correctEmail &&
           passwordController.text == correctPassword) {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => PlaceholderScreenUser(
-              username: emailController.text,
-              title: 'Welcome',
-            ),
+            builder: (context) => HomeScreen(),
           ),
         );
       } else {

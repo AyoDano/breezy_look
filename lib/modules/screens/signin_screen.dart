@@ -1,3 +1,4 @@
+import 'package:breezy_look/modules/screens/home_screen.dart';
 import 'package:breezy_look/modules/screens/login_screen.dart';
 import 'package:breezy_look/widgets/button_no_icon.dart';
 import 'package:breezy_look/widgets/terms_and_privacy_text.dart';
@@ -52,8 +53,9 @@ class _SignInScreenState extends State<SignInScreen> {
   void _signUp() {
     if (_formKey.currentState?.validate() ?? false) {
       if (passwordController.text == confirmPasswordController.text) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Sign Up Successful')),
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
