@@ -1,3 +1,4 @@
+import 'package:breezy_look/modules/data/repositories/mock_database.dart';
 import 'package:breezy_look/modules/screens/home_screen.dart';
 import 'package:breezy_look/modules/screens/login_screen.dart';
 import 'package:breezy_look/widgets/button_no_icon.dart';
@@ -138,7 +139,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginScreen('Login Screen'),
+                            builder: (context) => LoginScreen(
+                              databaseRepository: MockDatabase(),
+                            ),
                           ),
                         );
                       },

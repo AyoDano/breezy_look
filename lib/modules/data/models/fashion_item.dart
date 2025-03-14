@@ -18,7 +18,7 @@ class FashionItem {
   }
 }
 
-// Example list of FashionItems (mock database)
+// Example list of FashionItems
 List<FashionItem> fashionItems = [
   FashionItem(
     name: "Brown Jacket",

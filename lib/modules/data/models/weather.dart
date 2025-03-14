@@ -13,8 +13,7 @@ class Weather {
 // es wirde Ausgegeben, was in der Klammer nach print kommt. Mit Hilfe
 // von string interpolationen
   void displayWeather() {
-    print(
-        "Das Wetter in $location ist $condition mit einer Temperatur von: $temperature°C.");
+    print("The weather $location is $condition and has: $temperature°C.");
   }
 
 // Eine weitere Methode, um eventuelle wetterupdates auszugeben

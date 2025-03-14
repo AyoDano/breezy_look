@@ -1,4 +1,5 @@
-import 'package:breezy_look/modules/screens/home_screen.dart';
+import 'package:breezy_look/modules/data/repositories/mock_database.dart';
+import 'package:breezy_look/modules/screens/placeholder_screen_user.dart';
 import 'package:breezy_look/modules/screens/signin_screen.dart';
 import 'package:breezy_look/widgets/button_no_icon.dart';
 import 'package:breezy_look/widgets/terms_and_privacy_text.dart';
@@ -6,8 +7,8 @@ import 'package:breezy_look/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  final String title;
-  const LoginScreen(this.title, {super.key});
+  final MockDatabase databaseRepository;
+  const LoginScreen({super.key, required this.databaseRepository});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -20,37 +21,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final String correctPassword = "MiaoMiao1!";
 
   final _formKey = GlobalKey<FormState>();
-  bool isButtonEnabled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    emailController.addListener(_validateForm);
-    passwordController.addListener(_validateForm);
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  void _validateForm() {
-    setState(() {
-      isButtonEnabled =
-          emailController.text.isNotEmpty && passwordController.text.isNotEmpty;
-    });
-  }
 
   void _login() {
     if (_formKey.currentState?.validate() ?? false) {
       if (emailController.text == correctEmail &&
           passwordController.text == correctPassword) {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => PlaceholderScreenUser(
+              username: emailController.text,
+              title: 'Welcome',
+            ),
           ),
         );
       } else {
@@ -86,27 +68,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 label: "Email",
                 placeholder: "Example@mail.com",
                 controller: emailController,
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Please enter a valid email'
-                    : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Bitte eine gültige E-Mail-Adresse eingeben';
+                  }
+                  return null;
+                },
               ),
-              SizedBox(height: 10),
+              SizedBox(
+                height: 10,
+              ),
               PasswordFieldWithLabel(
                 label: "Password",
                 placeholder: "Use a strong password",
                 controller: passwordController,
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Please enter a password'
-                    : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a password';
+                  }
+                  return null;
+                },
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 40.0),
                 child: Column(
                   children: [
                     IconlessButtonWidget(
-                      text: "Login",
-                      onPressed: isButtonEnabled ? _login : null,
-                    ),
+                        text: "Login",
+                        onPressed: () {
+                          _login();
+                          print("Login successful");
+                        }),
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {

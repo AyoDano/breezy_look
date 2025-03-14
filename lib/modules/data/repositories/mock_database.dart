@@ -1,62 +1,69 @@
-import 'package:breezy_look/modules/data/models/fashion_item.dart';
-import 'package:breezy_look/modules/data/models/user.dart';
-import 'package:breezy_look/modules/data/models/weather.dart';
-import 'package:breezy_look/modules/data/repositories/database_repository.dart';
+import 'dart:async';
+import '../models/fashion_item.dart';
+import '../models/user.dart';
+import '../models/weather.dart';
+import 'database_repository.dart';
 
 class MockDatabase implements DatabaseRepository {
-  // Lists to store users and clothing items
+  // Lists to store mock data
   List<User> users = [];
   List<FashionItem> clothingItems = [];
   Weather? currentWeather;
 
-  // Add a user to the mock database
+  // Helper function to simulate a fixed delay of 2 seconds
+  Future<void> _simulateDelay() async {
+    await Future.delayed(Duration(seconds: 2));
+  }
+
+  // Add a user
   @override
-  void addUser(User user) {
+  Future<void> addUser(User user) async {
+    await _simulateDelay();
     users.add(user);
   }
 
-  // Add a clothing item to the mock database
+  // Get all users
   @override
-  void addClothingItem(FashionItem item) {
+  Future<List<User>> getAllUsers() async {
+    await _simulateDelay();
+    return List.from(users);
+  }
+
+  // Add a clothing item
+  @override
+  Future<void> addClothingItem(FashionItem item) async {
+    await _simulateDelay();
     clothingItems.add(item);
   }
 
-  // Retrieve clothing items filtered by category
+  // Get clothing items by category
   @override
-  List<FashionItem> getClothingItemsByCategory(String category) {
+  Future<List<FashionItem>> getClothingItemsByCategory(String category) async {
+    await _simulateDelay();
     return clothingItems.where((item) => item.category == category).toList();
   }
 
-  // Retrieve all stored clothing items
+  // Get all clothing items
   @override
-  List<FashionItem> getAllClothingItems() {
+  Future<List<FashionItem>> getAllClothingItems() async {
+    await _simulateDelay();
     return clothingItems;
   }
 
-  // Retrieve outfit suggestions (e.g., returns 3 random items from the given category)
+  // Get outfit suggestions
   @override
-  List<FashionItem> getOutfitSuggestions(String category) {
+  Future<List<FashionItem>> getOutfitSuggestions(String category) async {
+    await _simulateDelay();
     return clothingItems
         .where((item) => item.category == category)
         .take(3)
         .toList();
   }
 
-  // Update the weather data
+  // Update weather data
   @override
-  void updateWeather(Weather weather) {
+  Future<void> updateWeather(Weather weather) async {
+    await _simulateDelay();
     currentWeather = weather;
-  }
-
-  // Debugging: Display all stored clothing items
-  void displayAllClothingItems() {
-    if (clothingItems.isEmpty) {
-      print("No clothing items stored in the database.");
-    } else {
-      print("Stored clothing items:");
-      for (var item in clothingItems) {
-        item.display();
-      }
-    }
   }
 }

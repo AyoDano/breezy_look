@@ -6,21 +6,24 @@ abstract class DatabaseRepository {
   // Constructor
   DatabaseRepository();
 
-  // Add a user to the database
-  void addUser(User user);
+  // Add a user asynchronously
+  Future<void> addUser(User user);
 
-  // Add a clothing item to the database
-  void addClothingItem(FashionItem item);
+  // Get all users asynchronously
+  Future<List<User>> getAllUsers();
 
-  // Retrieve clothing items by category
-  List<FashionItem> getClothingItemsByCategory(String category);
+  // Add a clothing item asynchronously
+  Future<void> addClothingItem(FashionItem item);
 
-  // Retrieve all clothing items
-  List<FashionItem> getAllClothingItems();
+  // Get clothing items by category asynchronously
+  Future<List<FashionItem>> getClothingItemsByCategory(String category);
 
-  // Retrieve outfit suggestions based on a category
-  List<FashionItem> getOutfitSuggestions(String category);
+  // Get all clothing items asynchronously
+  Future<List<FashionItem>> getAllClothingItems();
 
-  // Update the current weather data
-  void updateWeather(Weather weather);
+  // Get outfit suggestions asynchronously
+  Future<List<FashionItem>> getOutfitSuggestions(String category);
+
+  // Update weather data asynchronously
+  Future<void> updateWeather(Weather weather);
 }

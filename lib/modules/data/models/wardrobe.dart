@@ -6,7 +6,7 @@ class Wardrobe {
 // Die Methode addClothingItem fügt der obigen Liste clothingItems ein weiteres
 // Kleidungsstück hinzu mit der Kategorie und der Beschreibung des Teils
   void addClothingItem(String category, String description) {
-    clothingItems.add({'Kategorie': category, 'Beschreibung': description});
+    clothingItems.add({'Category': category, 'Description': description});
   }
 
 // Die Funktion getOutfitSuggestions soll mit dem Parameter
@@ -15,9 +15,7 @@ class Wardrobe {
 // und nach dem Keywort welches zu der Kategorie passt.
 // Danach werden die gefundenen items in einer Liste auf displayAllClothing
   List<Map<String, String>> getOutfitSuggestions(String category) {
-    return clothingItems
-        .where((item) => item['Kategorie'] == category)
-        .toList();
+    return clothingItems.where((item) => item['Category'] == category).toList();
   }
 
 // Die displayAllClothing Methode, soll dem User alle gespeicherten Teile anzeigen
@@ -26,11 +24,11 @@ class Wardrobe {
 // clothingItems aus der Map ausgeben
   void displayAllClothing() {
     if (clothingItems.isEmpty) {
-      print("Dein Kleiderschrank ist leider noch leer.");
+      print("Your wardrobe is empty.");
     } else {
-      print("Deine Kleidungsstücke:");
+      print("Your items");
       for (var item in clothingItems) {
-        print("- ${item['Kategorie']}: ${item['Beschreibung']}");
+        print("- ${item['Category']}: ${item['Description']}");
       }
     }
   }
