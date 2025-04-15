@@ -1,8 +1,8 @@
 import 'package:breezy_look/modules/data/models/fashion_item.dart';
-import 'package:breezy_look/widgets/greetings_header.dart';
-import 'package:breezy_look/widgets/location_banner.dart';
-import 'package:breezy_look/widgets/picture_card.dart';
-import 'package:breezy_look/widgets/today_location_forecast.dart';
+import 'package:breezy_look/utils/ui/widgets/greetings_header.dart';
+import 'package:breezy_look/utils/ui/widgets/location_banner.dart';
+import 'package:breezy_look/utils/ui/widgets/picture_card.dart';
+import 'package:breezy_look/utils/ui/widgets/today_location_forecast.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {

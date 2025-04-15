@@ -1,9 +1,9 @@
-import 'package:breezy_look/widgets/button_no_icon.dart';
-import 'package:breezy_look/widgets/custom_app_bar_header_animate.dart';
-import 'package:breezy_look/widgets/selectable_chips_row.dart';
-import 'package:breezy_look/widgets/selector_widget.dart';
-import 'package:breezy_look/widgets/slider_widget.dart';
-import 'package:breezy_look/widgets/textfield_input.dart';
+import 'package:breezy_look/utils/ui/widgets/button_no_icon.dart';
+import 'package:breezy_look/utils/ui/widgets/custom_app_bar_header_animate.dart';
+import 'package:breezy_look/utils/ui/widgets/selectable_chips_row.dart';
+import 'package:breezy_look/utils/ui/widgets/selector_widget.dart';
+import 'package:breezy_look/utils/ui/widgets/slider_widget.dart';
+import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
 
 class AddItemsScreen extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:breezy_look/modules/data/repositories/mock_database.dart';
 import 'package:breezy_look/modules/screens/placeholder_screen_user.dart';
 import 'package:breezy_look/modules/screens/signin_screen.dart';
-import 'package:breezy_look/widgets/button_no_icon.dart';
-import 'package:breezy_look/widgets/terms_and_privacy_text.dart';
-import 'package:breezy_look/widgets/textfield_input.dart';
+import 'package:breezy_look/utils/ui/widgets/button_no_icon.dart';
+import 'package:breezy_look/utils/ui/widgets/terms_and_privacy_text.dart';
+import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

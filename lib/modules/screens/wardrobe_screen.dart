@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:breezy_look/modules/data/models/fashion_item.dart';
-import 'package:breezy_look/widgets/textfield_input.dart';
+import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
 import 'package:breezy_look/config/themes/theme_light.dart';
 
 class WardrobeScreen extends StatefulWidget {
