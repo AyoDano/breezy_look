@@ -1,5 +1,5 @@
 import 'package:breezy_look/config/themes/theme_light.dart';
-import 'package:breezy_look/modules/screens/home_screen.dart';
+import 'package:breezy_look/utils/app_navigationbar.dart';
 import 'package:flutter/material.dart';
 
 class BreezyLookApp extends StatelessWidget {
@@ -11,7 +11,9 @@ class BreezyLookApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BreezyLook',
       theme: AppTheme.lightTheme, // Custom theme of my application
-      home: HomeScreen(),
+      home: AppNavigation(),
+      // MainScreen(),
+      // HomeScreen(),
       // LoginScreen(databaseRepository: MockDatabase()),
       // Starting point
     );
