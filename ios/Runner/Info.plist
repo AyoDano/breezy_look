@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need your location to display the weather at your location.</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>Allow BreezyLook permanent location access to always show you the current weather for your location.</string>
+
+
 </dict>
 </plist>
