@@ -1,6 +1,6 @@
 import 'package:breezy_look/modules/data/models/fashion_item.dart';
 import 'package:breezy_look/modules/data/models/user.dart';
-import 'package:breezy_look/modules/data/models/weather.dart';
+import 'package:breezy_look/modules/data/repositories/weather.dart';
 
 abstract class DatabaseRepository {
   // Constructor

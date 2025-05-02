@@ -1,7 +1,7 @@
 import 'dart:async';
 import '../models/fashion_item.dart';
 import '../models/user.dart';
-import '../models/weather.dart';
+import 'weather.dart';
 import 'database_repository.dart';
 
 class MockDatabase implements DatabaseRepository {
