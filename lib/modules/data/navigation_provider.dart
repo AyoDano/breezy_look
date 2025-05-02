@@ -6,7 +6,11 @@ class NavigationProvider with ChangeNotifier {
   int get currentIndex => _currentIndex;
 
   void setIndex(int index) {
-    _currentIndex = index;
-    notifyListeners();
+// if für performance verbesserung, da notifylisteners nicht aufegrufen wird wenn
+// sich im aktuellen index nicht verändert hat
+    if (_currentIndex != index) {
+      _currentIndex = index;
+      notifyListeners();
+    }
   }
 }
