@@ -27,7 +27,7 @@ class MainScreenState extends State<MainScreen> {
     'home',
     'wardrobe',
     'weather',
-    'profile', // Name of SVG-Data
+    'profile',
   ];
 
   @override
