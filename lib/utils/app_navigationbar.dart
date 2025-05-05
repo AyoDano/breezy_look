@@ -1,13 +1,13 @@
 import 'package:breezy_look/modules/data/navigation_provider.dart';
-import 'package:breezy_look/modules/screens/add_items.dart';
+import 'package:breezy_look/screens/add_items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import 'package:breezy_look/modules/screens/home_screen.dart';
-import 'package:breezy_look/modules/screens/wardrobe_screen.dart';
-import 'package:breezy_look/modules/screens/placeholder_screen.dart';
+import 'package:breezy_look/screens/home_screen.dart';
+import 'package:breezy_look/screens/wardrobe_screen.dart';
+import 'package:breezy_look/screens/placeholder_screen.dart';
 import 'package:breezy_look/config/themes/theme_light.dart';
 
 class AppNavigation extends StatelessWidget {
@@ -16,8 +16,8 @@ class AppNavigation extends StatelessWidget {
   final List<Widget> _screens = [
     HomeScreen(),
     WardrobeScreen(),
-    PlaceholderScreen("Weather"),
-    PlaceholderScreen("Profile"),
+    PlaceholderScreen(title: "Weather"),
+    PlaceholderScreen(title: "Profile"),
   ];
 
   final List<String> _navIcons = [
@@ -29,21 +29,20 @@ class AppNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navigationProvider = Provider.of<NavigationProvider>(context);
-    final currentIndex = navigationProvider.currentIndex;
-
     return Scaffold(
       extendBody: true,
       body: SafeArea(
-        child: _screens[currentIndex],
+        child: Consumer<NavigationProvider>(
+          builder: (context, navProvider, child) {
+            return _screens[navProvider.currentIndex];
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (context) => const AddItemsScreen()),
-          );
-        },
+        onPressed: () => Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) => const AddItemsScreen()),
+        ),
         backgroundColor: AppTheme.primaryColor,
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white),
@@ -69,24 +68,27 @@ class AppNavigation extends StatelessWidget {
               shape: const CircularNotchedRectangle(),
               color: Colors.transparent,
               elevation: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(_navIcons.length, (index) {
-                  final isSelected = currentIndex == index;
-                  return IconButton(
-                    icon: SvgPicture.asset(
-                      "assets/icons/${_navIcons[index]}-${isSelected ? 'active' : 'inactive'}.svg",
-                      colorFilter: ColorFilter.mode(
-                        isSelected ? AppTheme.primaryColor : Colors.grey,
-                        BlendMode.srcIn,
+              child: Consumer<NavigationProvider>(
+                  builder: (context, navProvider, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(_navIcons.length, (index) {
+                    final isSelected = navProvider.currentIndex == index;
+                    return IconButton(
+                      icon: SvgPicture.asset(
+                        "assets/icons/${_navIcons[index]}-${isSelected ? 'active' : 'inactive'}.svg",
+                        colorFilter: ColorFilter.mode(
+                          isSelected ? AppTheme.primaryColor : Colors.grey,
+                          BlendMode.srcIn,
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      navigationProvider.setIndex(index);
-                    },
-                  );
-                }),
-              ),
+                      onPressed: () {
+                        navProvider.setIndex(index);
+                      },
+                    );
+                  }),
+                );
+              }),
             ),
           ),
         ),

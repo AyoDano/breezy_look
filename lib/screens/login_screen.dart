@@ -1,5 +1,5 @@
 import 'package:breezy_look/modules/data/repositories/mock_database.dart';
-import 'package:breezy_look/screens/placeholder_screen_user.dart';
+import 'package:breezy_look/screens/placeholder_screen.dart'; // PlaceholderScreen importiert
 import 'package:breezy_look/screens/signin_screen.dart';
 import 'package:breezy_look/utils/ui/widgets/button_no_icon.dart';
 import 'package:breezy_look/utils/ui/widgets/terms_and_privacy_text.dart';
@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final String correctEmail = "MiaoMiao@mail.com";
+  final String correctEmail = "Miao@maio.com";
   final String correctPassword = "MiaoMiao1!";
 
   final _formKey = GlobalKey<FormState>();
@@ -29,9 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PlaceholderScreenUser(
-              username: emailController.text,
+            builder: (context) => PlaceholderScreen(
               title: 'Welcome',
+              username: emailController.text,
             ),
           ),
         );
@@ -70,21 +70,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Bitte eine gültige E-Mail-Adresse eingeben';
+                    return "please enter a valid email address";
                   }
                   return null;
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               PasswordFieldWithLabel(
                 label: "Password",
                 placeholder: "Use a strong password",
                 controller: passwordController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a password';
+                    return "Please enter a password";
                   }
                   return null;
                 },
@@ -94,11 +92,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     IconlessButtonWidget(
-                        text: "Login",
-                        onPressed: () {
-                          _login();
-                          print("Login successful");
-                        }),
+                      text: "Login",
+                      onPressed: () {
+                        _login();
+                        print("Login successful");
+                      },
+                    ),
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
