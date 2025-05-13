@@ -32,11 +32,17 @@ class LocationService {
 
       if (placemarks.isNotEmpty) {
         final placemark = placemarks.first;
-        final city = placemark.locality ?? placemark.subAdministrativeArea;
+        final city = placemark.locality ??
+            placemark.subAdministrativeArea ??
+            placemark.administrativeArea ??
+            '';
         final country = placemark.country ?? '';
+        if (city.isEmpty && country.isEmpty) {
+          return 'Location not found';
+        }
         return '$city, $country';
       } else {
-        return 'Your Location is unknown';
+        return 'Location not found';
       }
     } catch (e) {
       print('Error in Geocoding: $e');

@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
 import 'package:breezy_look/screens/home_screen.dart';
 import 'package:breezy_look/screens/wardrobe_screen.dart';
 import 'package:breezy_look/screens/placeholder_screen.dart';
