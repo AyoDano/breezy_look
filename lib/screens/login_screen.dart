@@ -1,14 +1,14 @@
-import 'package:breezy_look/modules/data/repositories/mock_database.dart';
-import 'package:breezy_look/screens/placeholder_screen.dart'; // PlaceholderScreen importiert
-import 'package:breezy_look/screens/signin_screen.dart';
+import 'package:breezy_look/screens/app_navigationbar.dart';
+import 'package:breezy_look/screens/signup_screen.dart';
 import 'package:breezy_look/utils/ui/widgets/button_no_icon.dart';
 import 'package:breezy_look/utils/ui/widgets/terms_and_privacy_text.dart';
 import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  final MockDatabase databaseRepository;
-  const LoginScreen({super.key, required this.databaseRepository});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -17,27 +17,32 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final String correctEmail = "Miao@maio.com";
-  final String correctPassword = "MiaoMiao1!";
-
   final _formKey = GlobalKey<FormState>();
 
-  void _login() {
+  Future<void> _login() async {
     if (_formKey.currentState?.validate() ?? false) {
-      if (emailController.text == correctEmail &&
-          passwordController.text == correctPassword) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PlaceholderScreen(
-              title: 'Welcome',
-              username: emailController.text,
-            ),
-          ),
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
         );
-      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => AppNavigation()),
+        );
+      } on FirebaseAuthException catch (e) {
+        String message = 'Login failed';
+        if (e.code == 'user-not-found') {
+          message = 'No user found for that email.';
+        } else if (e.code == 'wrong-password') {
+          message = 'Wrong password provided.';
+        }
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Incorrect email or password')),
+          SnackBar(content: Text(message)),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Login failed: ${e.toString()}")),
         );
       }
     }
@@ -70,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "please enter a valid email address";
+                    return "Please enter a valid email address";
                   }
                   return null;
                 },
@@ -93,24 +98,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     IconlessButtonWidget(
                       text: "Login",
-                      onPressed: () {
-                        _login();
-                        print("Login successful");
-                      },
+                      onPressed: _login,
                     ),
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SignInScreen('Sign In Screen'),
+                          CupertinoPageRoute(
+                            builder: (context) => SignUpScreen('Sign Up'),
                           ),
                         );
                       },
                       child: Text(
-                        "No account? Sign In",
+                        "No account? Register here",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Colors.blue,

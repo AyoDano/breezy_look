@@ -1,20 +1,21 @@
-import 'package:breezy_look/modules/data/repositories/mock_database.dart';
-import 'package:breezy_look/screens/home_screen.dart';
+import 'package:breezy_look/screens/app_navigationbar.dart';
 import 'package:breezy_look/screens/login_screen.dart';
 import 'package:breezy_look/utils/ui/widgets/button_no_icon.dart';
 import 'package:breezy_look/utils/ui/widgets/terms_and_privacy_text.dart';
 import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   final String title;
-  const SignInScreen(this.title, {super.key});
+  const SignUpScreen(this.title, {super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInScreenState extends State<SignUpScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -51,16 +52,37 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
-  void _signUp() {
+  Future<void> _signUp() async {
     if (_formKey.currentState?.validate() ?? false) {
-      if (passwordController.text == confirmPasswordController.text) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
-      } else {
+      if (passwordController.text != confirmPasswordController.text) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Passwords do not match')),
+        );
+        return;
+      }
+
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => AppNavigation()),
+        );
+      } on FirebaseAuthException catch (e) {
+        String message = 'Registration failed';
+        if (e.code == 'email-already-in-use') {
+          message = 'An account already exists for this email.';
+        } else if (e.code == 'weak-password') {
+          message = 'The password is too weak.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Registration failed: ${e.toString()}')),
         );
       }
     }
@@ -120,7 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 controller: confirmPasswordController,
                 isLabelVisible: false,
                 validator: (value) => value == null || value.isEmpty
-                    ? 'Please enter a password'
+                    ? 'Please confirm your password'
                     : null,
               ),
               Padding(
@@ -129,19 +151,15 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     IconlessButtonWidget(
                       text: "Sign In",
-                      onPressed: isButtonEnabled
-                          ? _signUp
-                          : null, // Button will be deactivated if fields are empty
+                      onPressed: isButtonEnabled ? _signUp : null,
                     ),
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(
-                              databaseRepository: MockDatabase(),
-                            ),
+                          CupertinoPageRoute(
+                            builder: (context) => LoginScreen(),
                           ),
                         );
                       },
