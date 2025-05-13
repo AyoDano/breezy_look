@@ -7,7 +7,7 @@ class TodayForecast extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Text(
-          "Today in Valletta, you can expect sun giving way to increasing clouds, with a high of 20°C and a low of 13°C. Given the mild temperatures, a light sweater or long-sleeved shirt should suffice during the day. \n\nIn the evening, consider adding a light jacket to stay comfortable as temperatures dip. Long pants and comfortable footwear are recommended for exploring the city. While rain isn't expected today, it's always a good idea to carry a small umbrella or a waterproof layer, just in case.",
+          "Today in Barcelona, you can expect sun giving way to increasing clouds, with a high of 16°C and a low of 13°C. Given the mild temperatures, a light sweater or long-sleeved shirt should suffice during the day. \n\nIn the evening, consider adding a light jacket to stay comfortable as temperatures dip. Long pants and comfortable footwear are recommended for exploring the city. While rain isn't expected today, it's always a good idea to carry a small umbrella or a waterproof layer, just in case.",
           textAlign: TextAlign.justify,
           style: Theme.of(context).textTheme.bodyLarge),
     ]);

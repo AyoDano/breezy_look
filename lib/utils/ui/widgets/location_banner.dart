@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:breezy_look/modules/data/repositories/location_service.dart';
-import 'package:breezy_look/modules/data/repositories/unsplash_service.dart';
-import 'package:breezy_look/modules/data/repositories/weather_service.dart';
+import 'package:breezy_look/services/location_service.dart';
+import 'package:breezy_look/services/unsplash_service.dart';
+import 'package:breezy_look/services/weather_service.dart';
 import 'package:flutter/material.dart';
 import 'package:breezy_look/config/themes/theme_light.dart';
 
@@ -65,6 +65,13 @@ class _LocationBannerState extends State<LocationBanner> {
         isLoading = false;
       });
     }
+  }
+
+  String _truncateLocationName(String? locationName) {
+    if (locationName == null || locationName.length <= 15) {
+      return locationName ?? '';
+    }
+    return '${locationName.substring(0, 15)}...';
   }
 
   @override
@@ -160,7 +167,7 @@ class _LocationBannerState extends State<LocationBanner> {
                               padding: const EdgeInsets.all(4),
                               child: weatherIconCode != null
                                   ? Image.network(
-                                      "https://openweathermap.org/img/wn/${weatherIconCode}@2x.png",
+                                      "https://openweathermap.org/img/wn/$weatherIconCode@2x.png",
                                       width: 35,
                                       height: 35,
                                       errorBuilder: (_, error, stackTrace) =>
@@ -212,7 +219,7 @@ class _LocationBannerState extends State<LocationBanner> {
                     ],
                   ),
                   Text(
-                    "$locationName, $country",
+                    "${_truncateLocationName(locationName)}, $country",
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: AppTheme.backgroundColor,
                           fontWeight: FontWeight.bold,
