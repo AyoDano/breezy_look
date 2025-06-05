@@ -13,26 +13,18 @@ class BreezyLookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context, listen: false);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'BreezyLook',
-      theme: AppTheme.lightTheme,
-      home: StreamBuilder<User?>(
-        stream: authService.authStateChanges,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          }
-
-          if (snapshot.hasData) {
-            return AppNavigation();
-          } else {
-            return const LoginScreen();
-          }
-        },
-      ),
+    return StreamBuilder<User?>(
+      stream: authService.authStateChanges,
+      builder: (context, snapshot) {
+        final isLoggedIn = snapshot.data != null;
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'BreezyLook',
+          home: isLoggedIn ? AppNavigation() : LoginScreen(),
+          theme: AppTheme.lightTheme,
+          key: isLoggedIn ? Key("Logged In") : Key("Not Logged In"),
+        );
+      },
     );
   }
 }
