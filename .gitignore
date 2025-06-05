@@ -1,3 +1,12 @@
+# Firebase
+**/google-services.json
+**/GoogleService-Info.plist
+lib/firebase_options.dart
+.firebase/
+.firebaserc
+firebase-debug.log
+firebase-debug.*.log
+
 # Miscellaneous
 *.class
 *.log
@@ -18,10 +27,9 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# IDEs
+.idea/
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -39,7 +47,14 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
+# Android Studio
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# .env
+.env
+firebase.json
+.gitignore
+pubspec.lock
+ios/Runner/Info.plist
