@@ -6,6 +6,7 @@ import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:breezy_look/services/google_auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -45,6 +46,20 @@ class _LoginScreenState extends State<LoginScreen> {
           SnackBar(content: Text("Login failed: ${e.toString()}")),
         );
       }
+    }
+  }
+
+  Future<void> _loginWithGoogle() async {
+    final user = await GoogleAuthService().signInWithGoogle();
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => AppNavigation()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google Sign-In failed')),
+      );
     }
   }
 
@@ -100,7 +115,32 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: "Login",
                       onPressed: _login,
                     ),
+                    SizedBox(height: 16),
+                    Text('or', style: TextStyle(fontWeight: FontWeight.w800)),
                     SizedBox(height: 20),
+                    GestureDetector(
+                      onTap: _loginWithGoogle,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/google_icon.png',
+                            height: 24,
+                            width: 24,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            'Google SignIn',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 30),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -121,7 +161,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              TermsAndPrivacyText(),
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TermsAndPrivacyText(),
+              ),
             ],
           ),
         ),
