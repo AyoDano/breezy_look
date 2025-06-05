@@ -1,5 +1,6 @@
 import 'package:breezy_look/screens/app_navigationbar.dart';
 import 'package:breezy_look/screens/login_screen.dart';
+import 'package:breezy_look/services/google_auth_service.dart';
 import 'package:breezy_look/utils/ui/widgets/button_no_icon.dart';
 import 'package:breezy_look/utils/ui/widgets/terms_and_privacy_text.dart';
 import 'package:breezy_look/utils/ui/widgets/textfield_input.dart';
@@ -88,27 +89,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  Future<void> _signUpWithGoogle() async {
+    final user = await GoogleAuthService().signInWithGoogle();
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => AppNavigation()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google Sign-Up failed')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Sign In"),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Image.asset(
-                  "assets/icons/app_icon/icon_breezylook_transparent.png",
-                  fit: BoxFit.contain,
-                  width: 100,
-                ),
+              SizedBox(height: 0),
+              Image.asset(
+                "assets/icons/app_icon/icon_breezylook_transparent.png",
+                fit: BoxFit.contain,
+                width: 100,
               ),
+              SizedBox(height: 24),
               TextFieldWithLabel(
                 label: "Username",
                 placeholder: "Choose a username",
@@ -145,36 +159,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ? 'Please confirm your password'
                     : null,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: Column(
+              SizedBox(height: 40),
+              IconlessButtonWidget(
+                text: "Sign Up",
+                onPressed: isButtonEnabled ? _signUp : null,
+              ),
+              SizedBox(height: 16),
+              Text('or', style: TextStyle(fontWeight: FontWeight.w800)),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: _signUpWithGoogle,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconlessButtonWidget(
-                      text: "Sign In",
-                      onPressed: isButtonEnabled ? _signUp : null,
+                    Image.asset(
+                      'assets/icons/google_icon.png',
+                      height: 24,
+                      width: 24,
                     ),
-                    SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Already a user? Log In",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.blue,
-                        ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Google Sign In',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(height: 30),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Already a user? Log In",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+              SizedBox(height: 12),
               TermsAndPrivacyText(),
+              SizedBox(height: 20),
             ],
           ),
         ),
