@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:breezy_look/modules/data/models/fashion_item.dart';
 import 'package:breezy_look/utils/ui/widgets/greetings_header.dart';
 import 'package:breezy_look/utils/ui/widgets/location_banner.dart';
@@ -8,11 +9,13 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  final String userName = "Daniel";
   final String profileImage = "assets/user/profile_image.jpg";
 
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final String userName = user?.displayName ?? "User not logged in";
+
     return Scaffold(
       body: SafeArea(
         top: true,
