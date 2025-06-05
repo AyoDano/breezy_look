@@ -1,5 +1,6 @@
 import 'package:breezy_look/modules/data/navigation_provider.dart';
 import 'package:breezy_look/screens/add_items.dart';
+import 'package:breezy_look/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,7 +17,7 @@ class AppNavigation extends StatelessWidget {
     HomeScreen(),
     WardrobeScreen(),
     PlaceholderScreen(title: "Weather"),
-    PlaceholderScreen(title: "Profile"),
+    ProfileScreen(),
   ];
 
   final List<String> _navIcons = [
