@@ -18,8 +18,14 @@ class LocationService {
           'Location authorisation permanently denied. Please activate in the settings.');
     }
 
+    Position? lastKnownPosition = await Geolocator.getLastKnownPosition();
+    if (lastKnownPosition != null) {
+      return lastKnownPosition;
+    }
+
     return await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.medium,
+      timeLimit: const Duration(seconds: 2),
     );
   }
 
