@@ -78,14 +78,15 @@ class _LocationBannerState extends State<LocationBanner> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return const Center(
-          child: Padding(
-        padding: EdgeInsets.all(80.0),
-        child: CircularProgressIndicator(
-          color: AppTheme.secondaryColor,
-          strokeWidth: 4.5,
-          strokeCap: StrokeCap.round,
+        child: Padding(
+          padding: EdgeInsets.all(80.0),
+          child: CircularProgressIndicator(
+            color: AppTheme.secondaryColor,
+            strokeWidth: 4.5,
+            strokeCap: StrokeCap.round,
+          ),
         ),
-      ));
+      );
     }
 
     if (hasError) {
@@ -180,6 +181,8 @@ class _LocationBannerState extends State<LocationBanner> {
                       ),
                     ],
                   ),
+
+                  /// ─────────────── KORREKTUR START ───────────────
                   Row(
                     children: [
                       Text(
@@ -209,17 +212,25 @@ class _LocationBannerState extends State<LocationBanner> {
                             ),
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        "$weatherDescription",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppTheme.backgroundColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                      Expanded(
+                        child: Text(
+                          weatherDescription ?? "",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppTheme.backgroundColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
                   Text(
                     "${_truncateLocationName(locationName)}, $country",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: AppTheme.backgroundColor,
                           fontWeight: FontWeight.bold,
